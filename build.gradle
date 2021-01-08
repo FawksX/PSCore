@@ -1,0 +1,105 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = 'forge'
+            url = 'https://files.minecraftforge.net/maven'
+        }
+        maven {
+            url = 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'gradle.plugin.org.spongepowered:spongegradle:0.8.1'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.plugin'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+group = 'games.synx'
+version = '1.0-SNAPSHOT'
+archivesBaseName = 'PSCore'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+
+    // SPONGE API
+    provided 'org.spongepowered:spongeforge:1.12.2-2838-7.1.8:dev'
+
+    // AIKAR ANNOTATION COMMAND FRAMEWORK
+    shadow "co.aikar:acf-sponge:0.5.0-SNAPSHOT"
+
+    // CONFIGURATE 4.0
+    shadow 'org.spongepowered:configurate-gson:4.0.0'
+
+    // LOCAL PLUGINS
+    apiCompile fileTree(dir: 'libs', include: '*.jar')
+
+}
+
+minecraft {
+
+    version = '1.12.2-14.23.1.2555'
+    runDir = 'run'
+
+    mappings = 'stable_39'
+}
+
+
+
+repositories {
+
+    mavenCentral()
+    // AIKAR ANNOTATION COMMAND FRAMEWORK
+    maven { url = "https://repo.aikar.co/content/groups/aikar/" }
+    // NUCLEUS POWERED
+    maven { url = "http://repo.drnaylor.co.uk/artifactory/list/minecraft" }
+
+}
+
+configurations {
+    provided
+    compile.extendsFrom provided
+    compileJava.options.encoding = "UTF-8"
+    jar.archiveName = rootProject.name + '.jar'
+    compileJava.options.fork = true
+}
+
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+
+    relocate 'co.aikar.commands', 'games.synx.libs.acf'
+    relocate 'co.aikar.locales', 'games.synx.libs.locales'
+    relocate 'org.spongepowered.configurate', 'games.synx.libs.configurate'
+    relocate 'io.leangen.geantyref', 'games.synx.libs.geantyref'
+    relocate 'org.checkerframework', 'games.synx.libs.checkerframework'
+
+    classifier '' // Replace the default JAR
+
+}
+
+configurations {
+    provided
+    compile.extendsFrom provided
+    compileJava.options.encoding = "UTF-8"
+    jar.archiveName = rootProject.name + '.jar'
+}
+
+reobf {
+    shadowJar {}
+}
+
+jar.finalizedBy('reobfJar')
+
+
+
+
+
+sponge.plugin.id = 'spongysb'
