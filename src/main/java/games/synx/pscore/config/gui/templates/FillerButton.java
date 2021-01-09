@@ -21,6 +21,4 @@ public class FillerButton {
         return new ItemStack(Item.getByNameOrId(item), 1, damage);
     }
 
-
-
 }

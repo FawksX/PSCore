@@ -9,7 +9,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
         modid = PSCoreInfo.ID + "forge",
         name = PSCoreInfo.NAME + "forge",
         version = PSCoreInfo.VERSION,
-        acceptableRemoteVersions = "*")
+        acceptableRemoteVersions = "*",
+        dependencies = "required-before:spongysb")
 public class PSCoreForge {
 
     private static MinecraftServer server;
