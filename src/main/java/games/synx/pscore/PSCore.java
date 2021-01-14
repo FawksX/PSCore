@@ -8,6 +8,7 @@ import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.plugin.PluginContainer;
 
 @Plugin(
         id = PSCoreInfo.ID,
@@ -26,6 +27,9 @@ public class PSCore {
 
     @Inject
     private Logger logger;
+
+    @Inject
+    private PluginContainer pluginContainer;
 
     @Listener
     public void onAboutToStart(GameAboutToStartServerEvent event) {
@@ -49,6 +53,10 @@ public class PSCore {
 
     public Logger getLogger() {
         return logger;
+    }
+
+    public PluginContainer getPluginContainer() {
+        return this.pluginContainer;
     }
 
     public static ConfigManager getConfigManager() {
