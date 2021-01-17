@@ -23,4 +23,8 @@ public abstract class AbstractConfigManager extends AbstractManager implements I
         return Paths.get(configDir + File.separator + fileName);
     }
 
+    public Path getGUIPath(String fileName) {
+        return Paths.get(configDir + File.separator + "gui" + File.separator + fileName);
+    }
+
 }
