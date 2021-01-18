@@ -34,7 +34,7 @@ public class EconomyUtil {
     }
 
     private static Cause getEconomyCause() {
-        return Cause.builder().build(EventContext.builder().add(EventContextKeys.PLUGIN, PSCore.get().getPluginContainer()).build());
+        return CauseUtil.getCause(PSCore.get().getPluginContainer());
     }
 
     /**

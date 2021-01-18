@@ -31,7 +31,7 @@ public abstract class AbstractConfiguration<T> implements IConfiguration {
         this.clazz = clazz;
         this.configFile = configFile;
 
-        loader = GsonConfigurationLoader.builder()/**.defaultOptions(opts -> opts.serializers(build -> build.register(GUIButtonWrapper.class, GUIButtonSerializer.INSTANCE)))**/.path(configFile).build();
+        loader = GsonConfigurationLoader.builder().path(configFile).build();
 
         this.node = loader.load();
 
