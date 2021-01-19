@@ -1,5 +1,6 @@
 package games.synx.pscore.config.gui.templates;
 
+import ca.landonjw.gooeylibs.inventory.api.Button;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
@@ -21,4 +22,8 @@ public class FillerButton {
         return new ItemStack(Item.getByNameOrId(item), 1, damage);
     }
 
+    public Button getFillerButton() {
+        return Button.builder().item(getItemStack()).displayName(displayName).build();
+    }
+    
 }
