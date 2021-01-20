@@ -13,6 +13,7 @@ public interface IConfiguration {
     @NonNull Object loadConfiguration(ObjectMapper<?> objectMapper, final ConfigurationNode node) throws ConfigurateException;
 
     void saveConfiguration(final Object configuration, final ConfigurationNode node) throws SerializationException;
+
     void setup();
 
     Path getConfigFile();

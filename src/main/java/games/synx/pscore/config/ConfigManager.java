@@ -1,24 +1,28 @@
 package games.synx.pscore.config;
 
 import games.synx.pscore.PSCore;
+import games.synx.pscore.config.impl.AbstractConfigManager;
+import games.synx.pscore.config.impl.IConfigManager;
+import games.synx.pscore.manager.IManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ConfigManager {
+public class ConfigManager extends AbstractConfigManager implements IManager, IConfigManager {
 
     private Path pixelmonskyblockDir;
     private Path psCoreDir;
     private PSCoreConf psCoreConf;
 
     public ConfigManager() {
-        PSCore.get().getLogger().info("Initialising ConfigManager");
+        super(PSCore.get().getLogger());
+
         setupConfigDirectories();
 
         try {
-            psCoreConf = new PSCoreConf(Paths.get(psCoreDir + "config.json"));
+            psCoreConf = new PSCoreConf(getFilePath("config.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,8 +52,12 @@ public class ConfigManager {
         return directory;
     }
 
-    public PSCoreSettings getPSCoreSettings() {
-        return this.psCoreConf.getSettings();
+    public Path getPixelmonSkyblockDir() {
+        return this.pixelmonskyblockDir;
     }
 
+    @Override
+    public PSCoreConf.PSCoreSettings getConf() {
+        return this.psCoreConf.getSettings();
+    }
 }

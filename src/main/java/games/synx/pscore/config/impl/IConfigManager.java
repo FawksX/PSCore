@@ -7,7 +7,9 @@ import java.nio.file.Path;
 public interface IConfigManager {
 
     Path getFilePath(String fileName);
+
     Logger getLogger();
+
     Object getConf();
 
 }

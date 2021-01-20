@@ -16,7 +16,10 @@ public abstract class AbstractConfigManager extends AbstractManager implements I
         super(logger);
         this.configDir = configDir;
 
-        logger.info("Initialising Config Manager");
+    }
+
+    public AbstractConfigManager(Logger logger) {
+        super(logger);
     }
 
     public Path getFilePath(String fileName) {

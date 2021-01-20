@@ -25,5 +25,5 @@ public class FillerButton {
     public Button getFillerButton() {
         return Button.builder().item(getItemStack()).displayName(displayName).build();
     }
-    
+
 }
