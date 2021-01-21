@@ -22,7 +22,7 @@ public class ConfigManager {
         setupConfigDirectories();
 
         try {
-            psCoreConf = new PSCoreConf(Paths.get(psCoreDir +"config.json"));
+            psCoreConf = new PSCoreConf(Paths.get(psCoreDir + File.separator + "config.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
