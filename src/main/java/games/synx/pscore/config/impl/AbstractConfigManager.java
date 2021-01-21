@@ -10,11 +10,11 @@ import java.nio.file.Paths;
 
 public abstract class AbstractConfigManager extends AbstractManager implements IManager, IConfigManager {
 
-    private Path configDir;
+    private Path dir;
 
-    public AbstractConfigManager(Logger logger, Path configDir) {
+    public AbstractConfigManager(Logger logger, Path dir) {
         super(logger);
-        this.configDir = configDir;
+        this.dir = dir;
 
     }
 
@@ -23,11 +23,11 @@ public abstract class AbstractConfigManager extends AbstractManager implements I
     }
 
     public Path getFilePath(String fileName) {
-        return Paths.get(configDir + File.separator + fileName);
+        return Paths.get(dir + File.separator + fileName);
     }
 
     public Path getGUIPath(String fileName) {
-        return Paths.get(configDir + File.separator + "gui" + File.separator + fileName);
+        return Paths.get(dir + File.separator + "gui" + File.separator + fileName);
     }
 
 }

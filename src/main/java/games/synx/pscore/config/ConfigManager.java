@@ -10,19 +10,19 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ConfigManager extends AbstractConfigManager implements IManager, IConfigManager {
+public class ConfigManager {
 
     private Path pixelmonskyblockDir;
     private Path psCoreDir;
     private PSCoreConf psCoreConf;
 
     public ConfigManager() {
-        super(PSCore.get().getLogger());
+        PSCore.get().getLogger().info("Initialising ConfigManager");
 
         setupConfigDirectories();
 
         try {
-            psCoreConf = new PSCoreConf(getFilePath("config.json"));
+            psCoreConf = new PSCoreConf(Paths.get(psCoreDir +"config.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,7 +56,6 @@ public class ConfigManager extends AbstractConfigManager implements IManager, IC
         return this.pixelmonskyblockDir;
     }
 
-    @Override
     public PSCoreConf.PSCoreSettings getConf() {
         return this.psCoreConf.getSettings();
     }

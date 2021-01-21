@@ -13,6 +13,9 @@ import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @Plugin(
         id = PSCoreInfo.ID,
         name = PSCoreInfo.NAME,
@@ -25,6 +28,8 @@ import org.spongepowered.api.plugin.PluginContainer;
 public class PSCore {
 
     private static PSCore instance;
+
+    private static Path pixelmonSBDir;
 
     private static ConfigManager configManager;
     private static PSModuleManager moduleManager;
@@ -39,8 +44,14 @@ public class PSCore {
     public void onAboutToStart(GameAboutToStartServerEvent event) {
         instance = this;
 
+        pixelmonSBDir = Paths.get("PixelmonSkyblock");
+
+        if (!pixelmonSBDir.toFile().exists()) {
+            pixelmonSBDir.toFile().mkdir();
+        }
+
         configManager = new ConfigManager();
-        moduleManager = new PSModuleManager(logger, configManager.getPixelmonSkyblockDir());
+        moduleManager = new PSModuleManager(logger, pixelmonSBDir);
 
 
 
@@ -76,6 +87,10 @@ public class PSCore {
 
     public static ConfigManager getConfigManager() {
         return configManager;
+    }
+
+    public static Path getPixelmonSkyblockDir() {
+        return pixelmonSBDir;
     }
 
 
