@@ -22,6 +22,12 @@ public class PlayerUtil {
         return offlinePlayer;
     }
 
+    public static User getOfflineSpongeUser(UUID uuid) {
+        Optional<UserStorageService> userStorage = Sponge.getServiceManager().provide(UserStorageService.class);
+        User offlinePlayer = userStorage.get().get(uuid).get();
+        return offlinePlayer;
+    }
+
     public static Player getOnlineSpongePlayer(UUID uuid) {
         return Sponge.getServer().getPlayer(uuid).get();
     }

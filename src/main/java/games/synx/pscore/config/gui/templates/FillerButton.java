@@ -13,7 +13,7 @@ public class FillerButton {
     public String item = "minecraft:stained_glass_pane";
 
     @Setting
-    public int damage = 12;
+    public int damage = 15;
 
     @Setting
     public String displayName = "§7";
